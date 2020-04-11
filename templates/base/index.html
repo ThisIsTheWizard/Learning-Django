@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock %} - Auth_App</title>
+  <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+  {% block main_content %}{% endblock %}
+
+  <script src="{% static 'assets/js/jQuery.min.js' %}"></script>
+  <script src="{% static 'assets/js/popper.min.js' %}"></script>
+  <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+  {% block javascripts %}{% endblock %}
+</body>
+</html>
