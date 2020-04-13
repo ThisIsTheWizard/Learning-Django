@@ -1,47 +1,88 @@
-{% extends 'base/index.html' %}
-
+{% extends 'layout/users.html' %}
 {% load static %}
 
-{% block title %} Users {% endblock %}
+{% block head_title %} Register {% endblock %}
 
 {% block main_content %}
-    <div class="col-md-6 mx-auto my-3">
-    <div class="card p-3 shadow">
-      <h1 class="text-center">Registration Form</h1>
-        {{ form.errors }}
-      <form method="POST" action="">
-        {% csrf_token %}
-        {{ form.username }}
-        {{ form.email }}
-        {{ form.first_name }}
-        {{ form.last_name }}
-        {{ form.password1 }}
-        {{ form.password2 }}
-        <input type="submit" class="btn btn-primary w-50" value="Register">
-      </form>
+<section id="register-page">
+  <div class="container d-flex justify-content-center align-items-center">
+    <div class="col-12 col-md-12 my-box my-5">
+      <div class="brand-info my-flex flex-column">
+        <div class="logo-box my-flex">
+          <img class="brand-logo img-fluid" src="{% static 'assets/img/logo.png' %}">
+        </div>
+        <div class="name">
+          <h1 style="text-shadow: 0px 0px 4px #000;color:#fff;">
+            SK Computer Training Center
+          </h1>
+        </div>
+      </div>
+      <div class="register-inputs">
+        <h4 class="form-header">
+          Want to be our student, Register Here!!!
+        </h4>
+        <form method="POST">
+          {% csrf_token %}
+          {% for error in form.non_field_errors %}
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ error }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% endfor %}
+
+          <div class="row">
+            <div class="col-md-6">
+              {{ form.first_name }}
+            </div>
+            <div class="col-md-6">
+              {{ form.last_name }}
+            </div>
+            <div class="col-md-3">
+              <p class="my-input bg-light text-primary">
+                Username
+              </p>
+            </div>
+            <div class="col-md-9">
+              {{ form.username }}
+            </div>
+            <div class="col-md-3">
+              <p class="my-input bg-light text-primary">E-mail</p>
+            </div>
+            <div class="col-md-9">
+              {{ form.email }}
+            </div>
+            <div class="col-md-3">
+              <p class="my-input bg-light text-primary">New Password</p>
+            </div>
+            <div class="col-md-9">
+              {{ form.password1 }}
+            </div>
+            <div class="col-md-3">
+              <p class="my-input bg-light text-primary">Confirm Password</p>
+            </div>
+            <div class="col-md-9">
+              {{ form.password2 }}
+            </div>
+          </div>
+          <div class="d-flex justify-content-around align-items-center px-md-5">
+            <button class="my-btn big border-0 w-50" type="submit" variant="primary">
+              Register
+            </button>
+            <a href="{% url 'login_page' %}" class="my-btn big my-link w-50 border-0">Have Account? Login Here</a>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-{% endblock %}
-
-{% block javascripts %}
-  <script>
-    let username = document.querySelector('#id_username');
-    username.setAttribute('placeholder', 'Username');
-    username.classList.add('form-control');
-    let email = document.querySelector('#id_email');
-    email.setAttribute('placeholder', 'E-mail');
-    email.classList.add('form-control');
-    let firstname = document.querySelector('#id_first_name');
-    firstname.setAttribute('placeholder', 'First Name');
-    firstname.classList.add('form-control');
-    let lastname = document.querySelector('#id_last_name');
-    lastname.setAttribute('placeholder', 'Last Name');
-    lastname.classList.add('form-control');
-    let password1 = document.querySelector('#id_password1');
-    password1.setAttribute('placeholder', 'New Password');
-    password1.classList.add('form-control');
-    let password2 = document.querySelector('#id_password2');
-    password2.setAttribute('placeholder', 'Confirm Password');
-    password2.classList.add('form-control');  
-  </script>
+</section>
+<script>
+  document.querySelector("#id_first_name").setAttribute("placeholder", "Firstname");
+  document.querySelector("#id_last_name").setAttribute("placeholder", "Lastname");
+  document.querySelector("#id_username").setAttribute("placeholder", "Username");
+  document.querySelector("#id_email").setAttribute("placeholder", "E-mail");
+  document.querySelector("#id_password1").setAttribute("placeholder", "New Password");
+  document.querySelector("#id_password2").setAttribute("placeholder", "Confirm Password");
+</script>
 {% endblock %}

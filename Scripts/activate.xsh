@@ -28,7 +28,7 @@ def _deactivate(args):
 _deactivate(["nondestructive"])
 aliases["deactivate"] = _deactivate
 
-$VIRTUAL_ENV = r"D:\Programming\Projects\Local\Django\Authentication"
+$VIRTUAL_ENV = r"D:\Programming\Projects\Local\Django\Auth_App"
 
 $_OLD_VIRTUAL_PATH = $PATH
 $PATH = $PATH[:]

@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.contrib.auth.decorators import login_required
 
-def index(index):
-  return HttpResponse("<h1>Home Page</h1>")
+
+@login_required(login_url='/users/login/')
+def home(request):
+    return render(request, 'layout/index.html')

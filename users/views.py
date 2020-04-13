@@ -1,22 +1,48 @@
-from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.shortcuts import render
-from .forms import register_form
-from django.contrib import messages
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from .forms import UserLoginForm, UserRegistrationForm
 
-def users(request):
-  context  = {"msg": "This is the users page"}
-  return render(request, 'users/index.html', context)
 
-def login_page(request):
-  context = {"msg": "This is the login page"}
-  return render(request, 'users/login.html', context)
+def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('/')
+    else:
+        next = request.GET.get('next')
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            if next:
+                return redirect(next)
+            return redirect('/')
 
-def register_page(request):
-  if request.method == 'POST':
-    form = register_form(request.POST)
-    if form.is_valid():
-      form.save()
-      messages.success(request, 'Successfully registered your account!!!')
-      return HttpResponseRedirect('login')
-  context = {"form": register_form()}
-  return render(request, 'users/register.html', context)
+        context = {"form": form}
+        return render(request, 'users/login.html', context)
+
+
+def register_view(request):
+    if request.user.is_authenticated:
+        return redirect('/')
+    else:
+        next = request.GET.get('next')
+        form = UserRegistrationForm(request.POST or None)
+        if form.is_valid():
+            user = form.save(commit=False)
+            password = form.cleaned_data.get('password1')
+            user.set_password(password)
+            user.save()
+            new_user = authenticate(username=user.username, password=password)
+            login(request, new_user)
+            if next:
+                return redirect(next)
+            return redirect('/')
+
+        context = {"form": form}
+        return render(request, 'users/register.html', context)
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('/')

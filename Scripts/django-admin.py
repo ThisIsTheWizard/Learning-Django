@@ -1,4 +1,4 @@
-#!D:\Programming\Projects\Local\Django\Authentication\Scripts\python.exe
+#!D:\Programming\Projects\Local\Django\Auth_App\Scripts\python.exe
 from django.core import management
 
 if __name__ == "__main__":

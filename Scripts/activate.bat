@@ -1,6 +1,6 @@
 @echo off
 
-set "VIRTUAL_ENV=D:\Programming\Projects\Local\Django\Authentication"
+set "VIRTUAL_ENV=D:\Programming\Projects\Local\Django\Auth_App"
 
 if defined _OLD_VIRTUAL_PROMPT (
     set "PROMPT=%_OLD_VIRTUAL_PROMPT%"
