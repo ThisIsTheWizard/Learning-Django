@@ -1,0 +1,42 @@
+{% extends 'layout/index.html' %}
+{% load static %}
+
+{% block head_title %} Login {% endblock %}
+
+{% block main_content %}
+<section id="login-page">
+  <div class="container d-flex justify-content-center align-items-center" style="height:100vh;">
+    <div class="col-md-6 my-box">
+      <div class="brand-info my-flex flex-column">
+        <div class="logo-box my-flex">
+          <img class="brand-logo img-fluid" src="{% static 'assets/img/logo.png' %}">
+        </div>
+        <div class="name">
+          <h1 style="text-shadow: 0px 0px 4px #000;color:#fff;">
+            SK Computer Training Center
+          </h1>
+        </div>
+      </div>
+      <div class="login-inputs">
+        <h4 class="form-header">
+          Login Here!!!
+        </h4>
+        <form method="POST">
+          {% csrf_token %}
+          {{ form }}
+          <div class="my-flex">
+            <button class="my-btn border-0 w-50" type="submit" variant="primary">
+              Login
+            </button>
+            <a href="{% url 'register_page' %}" class="my-btn my-link w-50 border-0">Register</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  document.querySelector("#id_username").setAttribute("placeholder", "Username");
+  document.querySelector("#id_password").setAttribute("placeholder", "Password");
+</script>
+{% endblock %}

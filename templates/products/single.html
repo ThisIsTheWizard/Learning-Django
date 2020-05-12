@@ -1,0 +1,14 @@
+{% extends 'layout/index.html' %}
+{% load static %}
+
+{% block head_title %} {{ product.title }} {% endblock %}
+
+{% block router %}
+  <h1 class="text-center">{{ product.title }}</h1>
+  <img src="{% static product.img.url %}" class="img-fluid w-25" alt="{{ product.title }}">
+  <p class="card-text">Old Price - <strike>{{ product.old_price }}</strike></p>
+  <p class="card-text">New Price - {{ product.new_price }}</p>
+  <h5 class="card-title">{{ product.title }}</h5>
+  <p class="card-text">Description - {{ product.desc }}</p>
+  <a href="{% url 'products' %}">Go Back To Main Page</a>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'layout/index.html' %}
+{% load static %}
+
+{% block head_title %} Products {% endblock %}
+
+{% block router %}
+  <h1 class="text-center">Products</h1>
+  <div class="row">
+    {% for product in products %}
+      <div class="col-md-4">
+        <div class="card">
+          <img src="{% static product.img.url %}" class="card-img-top img-fluid" alt="{{ product.title }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ product.title }}</h5>
+            <p class="card-text">Old Price - <strike>{{ product.old_price }}</strike></p>
+            <p class="card-text">New Price - {{ product.new_price }}</p>
+            <a href="{% url 'product' product.slug %}" class="btn btn-primary">See Description</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

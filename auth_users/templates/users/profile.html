@@ -1,0 +1,22 @@
+{% extends 'layout/users.html' %}
+
+{% load static %}
+
+{% block head_title %} User Profie {% endblock %}
+
+{% block main_content %}
+<section id="profile-page">
+  <h1>User Profile</h1>
+  <h4>Username: {{ user.username }}</h4>
+  <h4>Fullname: {{ user.first_name }} {{ user.last_name }}</h4>
+  <h4>E-mail: {{ user.email }}</h4>
+  <h4>Mobile: +880{{ profile.mobile }}</h4>
+  <h4>Address: {{ profile.address }}</h4>
+</section>
+{% endblock %}
+<form action="{% url 'update_profile' %}" method="POST">
+  {% csrf_token %}
+  <input type="number" name="mobile" value="{{ profile.mobile }}" class="form-control">
+  <input type="text" name="address" class="form-control" value="{{ profile.address }}"></input>
+  <input type="submit" value="Update Profile" class="btn btn-primary">
+</form>
